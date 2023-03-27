@@ -8,10 +8,17 @@ async function getCoordinates(cityName) {
   try {
     const response = await fetch(url);
     const data = await response.json();
+    //if the city dosen't exist throw Error
+    if (data.length===0) {
+        throw new Error('City not Found')   
+    }
+   
     const coordinates = { lat: data[0].lat, lon: data[0].lon };
     return coordinates;
+
   } catch (error) {
     console.error(error);
+    alert('City not found'); //error message
   }
 }
 
